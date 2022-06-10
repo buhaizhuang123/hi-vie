@@ -12,12 +12,12 @@
                 { required: true, message: '密码不能为空'},
                 { type: 'number', message: '密码必须为数字值'}]">
               <el-col :span="11">
-                <el-input type="password" name="password" style="width: 300px"  v-model="user.password"></el-input>
+                <el-input show-password	 type="password" name="password" style="width: 300px"  v-model="user.password"></el-input>
               </el-col>
             </el-form-item>
             <el-form-item label="验证码">
               <el-container style="width: 300px" >
-                <el-input aria-placeholder="验证码" v-model="user.imgValue"></el-input>
+                <el-input @keydown.enter.native="login(user)" aria-placeholder="验证码" v-model="user.imgValue" maxlength="5"></el-input>
                 <el-image :src="imgObj.src" @click="imgLoad"></el-image>
               </el-container>
             </el-form-item>
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     login(data) {
-      this.$axios.get('/login', {
+      this.$axios.get('doc/login', {
         params: data
       }).then(res => {
         console.log(res, 'res')
@@ -68,7 +68,7 @@ export default {
       })
     },
     imgLoad() {
-      this.$axios.get('image/generate').then(req => {
+      this.$axios.get('doc/image/generate').then(req => {
         this.imgObj.src = req.data.value
         this.user.imgKey = req.data.key
         console.log(this.src)

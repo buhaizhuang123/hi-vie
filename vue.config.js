@@ -26,9 +26,17 @@ module.exports = {
                 target: 'http://localhost:8911/',
                 changeOrigin: true,
                 ws: false,
-                // pathRewrite:{
-                //     '^/doc':''
-                // }
+                pathRewrite:{
+                    '^/doc':''
+                }
+            },
+            '/product':{
+                target: 'http://localhost:8912/',
+                changeOrigin: true,
+                // ws: false,
+                pathRewrite:{
+                    '^/product':''
+                }
             }
         }
     }

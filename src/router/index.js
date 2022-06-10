@@ -27,6 +27,10 @@ const routes = [
         path: '/sys',
         name: 'sys',
         component: () => import('@/views/consumer/SysController')
+    }, {
+        path: '/person_search',
+        name: 'person',
+        component: () => import('@/views/product/PersonShow')
     }
 ]
 

@@ -7,7 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 
 Vue.prototype.$axios = axios
-axios.defaults.baseURL = '/doc'
+// axios.defaults.baseURL = '/doc'
 axios.defaults.headers.post['Content-Type'] = 'text/plain'
 Vue.config.productionTip = false
 

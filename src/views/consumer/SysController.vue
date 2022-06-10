@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     list() {
-      this.$axios.get('/sys/listUsr?limit=1').then(req => {
+      this.$axios.get('doc/sys/listUsr?limit=1').then(req => {
         if (req.data.success) {
           this.user = req.data.data
         }
