@@ -33,7 +33,7 @@ module.exports = {
             '/product':{
                 target: 'http://localhost:8912/',
                 changeOrigin: true,
-                // ws: false,
+                ws: false,
                 pathRewrite:{
                     '^/product':''
                 }

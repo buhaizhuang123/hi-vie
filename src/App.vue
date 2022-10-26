@@ -1,13 +1,6 @@
 <template>
   <div id="app">
-<!--    <div id="nav">-->
-<!--      <router-link to="/">Home</router-link> |-->
-<!--      <router-link to="/about">About</router-link>-->
-<!--    </div>-->
-        <div>
-<!--          <router-link to="/hpIndex">hpIndex</router-link>-->
-        </div>
-    <router-view/>
+    <router-view v-if="isRouterAlive"/>
   </div>
 </template>
 
@@ -33,3 +26,28 @@
   color: #42b983;
 }
 </style>
+<script>
+export default {
+  name : "app",
+  data(){
+    return {
+      isRouterAlive:true // 刷新操作
+    }
+  },
+  methods:{
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(function (){this.isRouterAlive = true})
+    }
+  },
+  provide(){
+    return{
+      reload:this.reload
+    }
+  }
+
+
+
+
+}
+</script>

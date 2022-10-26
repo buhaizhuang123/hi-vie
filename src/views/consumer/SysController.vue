@@ -12,6 +12,7 @@
           </li>
         </el-aside>
         <el-main>
+          <el-button type="primary" icon="el-icon-search" @click="toPerseon">搜索</el-button>
           <el-table :data='user' style="width: 100%" :header-cell-style="headClass" :cell-style="rowClass" stripe>
             <el-table-column prop="userId" label="用户ID" width="180" fixed></el-table-column>
             <el-table-column prop="username" label="用户名" width="180"></el-table-column>
@@ -30,20 +31,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <div class="block">
-            <span class="demonstration">页数较少时的效果</span>
-            <el-pagination
-                layout="prev, pager, next"
-                :total="50">
-            </el-pagination>
-          </div>
-          <div class="block">
-            <span class="demonstration">大于 7 页时的效果</span>
-            <el-pagination
-                layout="prev, pager, next"
-                :total="1000">
-            </el-pagination>
-          </div>
+
         </el-main>
       </el-container>
 
@@ -123,6 +111,11 @@ export default {
     },
     rowClass() {
       return "text-align:center";
+    },
+    toPerseon(){
+      this.$router.replace({
+        path:'/person_search'
+      })
     }
   },
   watch: {

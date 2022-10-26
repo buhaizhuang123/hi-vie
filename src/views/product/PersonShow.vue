@@ -8,14 +8,34 @@
           <el-radio @click.native.prevent="change('address')" label="address">地址</el-radio>
           <el-radio @click.native.prevent="change('birthday')" label="birthday">生日</el-radio>
           <el-radio @click.native.prevent="change('idCard')" label="idCard">身份证</el-radio>
+          <el-button @click="toPage">跳转</el-button>
         </el-radio-group>
-        <el-input v-model="person.value" @change="valueTrim(person.value)" @keyup.enter.native="searchPerson(person)"
-                  placeholder="请输入内容">
-          <i slot="suffix" class="el-input__icon el-icon-close" @click="cleanVal"></i>
-          <el-button slot="append" icon="el-icon-search" @click="searchPerson(person)"></el-button>
-        </el-input>
       </el-header>
       <el-main>
+        <el-container>
+          <template>
+            <el-select     multiple
+                           collapse-tags
+                       v-model="person.types">
+              <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+          <el-input v-model="person.value" @change="valueTrim(person.value)" @keyup.enter.native="searchPerson(person)"
+                    placeholder="请输入内容">
+            <i slot="suffix" class="el-input__icon el-icon-close" @click="cleanVal"></i>
+            <el-button slot="append" icon="el-icon-search" @click="searchPerson(person)"></el-button>
+          </el-input>
+          <el-main>
+
+          </el-main>
+        </el-container>
+      </el-main>
+      <el-footer>
         <el-popover
             placement="bottom"
             title="添加用户"
@@ -59,33 +79,42 @@
           </el-container>
           <el-button slot="reference" @click="changeVis()">添加用户</el-button>
         </el-popover>
-        <el-table :data="persons" height="528px">
-          <el-table-column label="姓名" prop="name">
-            <template slot-scope="scope">
-              <div v-html="scope.row.name"></div>
-            </template>
-          </el-table-column>
-          <el-table-column label="年纪" prop="age"></el-table-column>
-          <el-table-column label="身份证" prop="idCard">
-            <template slot-scope="scope">
-              <div v-html="scope.row.idCard"></div>
-            </template>
-          </el-table-column>
-          <el-table-column label="地址" prop="address">
-            <template slot-scope="scope">
-              <div v-html="scope.row.address"></div>
-            </template>
-          </el-table-column>
-          <el-table-column label="生日" prop="birthday">
-            <template slot-scope="scope">
-              <div v-html="scope.row.birthday"></div>
-            </template>
-          </el-table-column>
-        </el-table>
+        <el-main>
+          <el-table :data="persons" height="528px">
+            <el-table-column label="姓名" prop="name">
+              <template slot-scope="scope">
+                <div v-html="scope.row.name"></div>
+              </template>
+            </el-table-column>
+            <el-table-column label="年纪" prop="age"></el-table-column>
+            <el-table-column label="身份证" prop="idCard">
+              <template slot-scope="scope">
+                <div v-html="scope.row.idCard"></div>
+              </template>
+            </el-table-column>
+            <el-table-column label="地址" prop="address">
+              <template slot-scope="scope">
+                <div v-html="scope.row.address"></div>
+              </template>
+            </el-table-column>
+            <el-table-column label="生日" prop="birthday">
+              <template slot-scope="scope">
+                <div v-html="scope.row.birthday"></div>
+              </template>
+            </el-table-column>
+            <el-table-column fixed="right"
+                             label="操作"
+                             width="100">
+              <template slot-scope="scope">
+                <el-button type="danger" icon="el-icon-delete" size="small" @click="delPerson(scope.row.id)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-main>
         <el-pagination layout="prev, pager, next" @current-change="currentChange" @next-click="currentChange"
                        :total="20">
         </el-pagination>
-      </el-main>
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -93,6 +122,7 @@
 <script>
 export default {
   name: "PersonShow",
+  inject:['reload'],
   data() {
     return {
       input: '',
@@ -100,17 +130,49 @@ export default {
       person: {
         type: '',
         value: '',
+        types:[]
+      },
+      page:{
         pageNum: 0,
-        size: 10
+        size: 10,
       },
       visible: false,
       personInfo: {'birthday': '', 'address': '', 'idCard': '', 'name': '', 'age': ''},
-      birthday: {'year': '', 'month': '', 'day': ''}
+      birthday: {'year': '', 'month': '', 'day': ''},
+      options: [
+        {
+          label: '姓名',
+          value: 'name'
+        },
+        {
+          label: '生日',
+          value: 'birthday'
+        },
+        {
+          label: '年龄',
+          value: 'age'
+        },
+        {
+          label: '地址',
+          value: 'address'
+        },
+        {
+          label: '身份证',
+          value: 'idCard'
+        }
+      ]
     }
   },
   mounted() {
     this.searchPerson(this.person)
-
+  },
+  watch:{
+    // persons: {
+    //   handler(newVal, oldVal) {
+    //   },
+    //   deep: true,
+    //   immediate: true
+    // }
   },
   methods: {
     ck(data) {
@@ -120,7 +182,10 @@ export default {
       })
     },
     searchPerson(data) {
-      this.$axios.get('/product/ps/search', {params: data}).then(res => {
+      console.log(this.person)
+      this.$axios.post('/product/ps/search', data,{
+        params:this.page
+      }).then(res => {
         this.persons = res.data
       })
     },
@@ -129,11 +194,12 @@ export default {
     },
     currentChange(data) {
       // 页码
-      this.person.pageNum = (data - 1) * this.person.size
+      this.page.pageNum = (data - 1) * this.page.size
       this.searchPerson(this.person)
     },
     cleanVal() {
       this.person.value = ''
+      this.reload()
     },
     valueTrim(data) {
       data = data.trim()
@@ -144,13 +210,24 @@ export default {
         this.visible = false;
         this.personInfo = {};
       });
-      this.searchPerson(this.person)
+      this.reload()
+    },
+    delPerson(data){
+      this.$axios.get('product/ps/del', {params: {"id":data}}).then(res => {
+        this.reload()
+      });
     },
     changeVis() {
       this.visible = !this.visible
       this.personInfo = {}
+    },
+    toPage(){
+      this.$router.push(
+          {
+            path:'hpIndex'
+          }
+      )
     }
-
 
   }
 }

@@ -10,7 +10,7 @@ Vue.prototype.$axios = axios
 // axios.defaults.baseURL = '/doc'
 axios.defaults.headers.post['Content-Type'] = 'text/plain'
 Vue.config.productionTip = false
-
+axios.defaults.withCredentials = true
 
 Vue.use(ElementUi)
 
@@ -25,6 +25,7 @@ axios.interceptors.request.use(conf => {
     } else {
         if (localStorage.getItem('authentication')) {
             conf.headers.authentication = localStorage.getItem('authentication')
+            
         }
     }
     return conf;

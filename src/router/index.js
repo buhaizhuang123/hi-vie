@@ -31,6 +31,10 @@ const routes = [
         path: '/person_search',
         name: 'person',
         component: () => import('@/views/product/PersonShow')
+    },{
+        path: '/photo',
+        name: 'photo',
+        component: () => import('@/views/product/photo')
     }
 ]
 
