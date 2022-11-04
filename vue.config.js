@@ -21,6 +21,7 @@ module.exports = {
     devServer: {
         disableHostCheck: true,
         port: 8081,
+        prefix: login,
         proxy: {
             '/doc': {
                 target: 'http://localhost:8911/',
