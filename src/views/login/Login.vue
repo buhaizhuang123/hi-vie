@@ -59,7 +59,7 @@ export default {
         if (res.data.success) {
           localStorage.setItem('authentication', res.headers.authentication)
           this.$router.push({
-            path: '/sys'
+            path: '/hpIndex'
           })
         }
         if (!res.data.success) {

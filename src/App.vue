@@ -28,25 +28,25 @@
 </style>
 <script>
 export default {
-  name : "app",
-  data(){
+  name: "app",
+  data() {
     return {
-      isRouterAlive:true // 刷新操作
+      isRouterAlive: true // 刷新操作
     }
   },
-  methods:{
-    reload(){
+  methods: {
+    reload() {
       this.isRouterAlive = false;
-      this.$nextTick(function (){this.isRouterAlive = true})
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
     }
   },
-  provide(){
-    return{
-      reload:this.reload
+  provide() {
+    return {
+      reload: this.reload
     }
   }
-
-
 
 
 }

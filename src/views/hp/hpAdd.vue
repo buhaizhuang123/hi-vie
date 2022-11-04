@@ -32,7 +32,7 @@ export default {
   methods:{
     save(data){
       console.log(data);
-      this.$axios.post('/person/add', data).then(req=>{
+      this.$axios.post('doc/person/add', data).then(req=>{
         this.$message.info(req)
         this.$emit('toPage','hpIndex');
       })
