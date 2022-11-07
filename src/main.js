@@ -25,7 +25,6 @@ axios.interceptors.request.use(conf => {
     } else {
         if (localStorage.getItem('authentication')) {
             conf.headers.authentication = localStorage.getItem('authentication')
-
         }
     }
     return conf;
@@ -35,17 +34,18 @@ axios.interceptors.request.use(conf => {
 axios.interceptors.response.use(res => {
     if (res.status === 200 && res.data.message === 'loginSuccess'){
         router.replace({
-            path: '/hpIndex',
-            query: {redirect: router.currentRoute.fullPath}
+            path: '/home',
+            // query: {redirect: router.currentRoute.fullPath}
+        }).catch((err)=>{
+            return true
         })
     }
 
 
     return res;
 }, error => {
-    console.log('error', error.response)
     if ((error.response.status === 401 || error.response.status === 403)) {
-        ElementUi.Message(error.response.status)
+        ElementUi.Message(error.response.data)
         router.replace({
             path: '/login',
             query: {redirect: router.currentRoute.fullPath}

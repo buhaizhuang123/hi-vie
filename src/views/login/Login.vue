@@ -59,7 +59,7 @@ export default {
         if (res.data.success) {
           localStorage.setItem('authentication', res.headers.authentication)
           this.$router.push({
-            path: '/hpIndex'
+            path: '/home'
           })
         }
         if (!res.data.success) {
@@ -69,6 +69,7 @@ export default {
     },
     imgLoad() {
       this.$axios.get('doc/image/generate').then(req => {
+        console.log(req)
         this.imgObj.src = req.data.value
         this.user.imgKey = req.data.key
         console.log(this.src)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-        <el-aside width="400px  " class="hp_index_aside">
+        <el-aside width="400px" class="hp_index_aside">
           <el-row>
             <el-col :span="12">
               <el-menu default-active="2"

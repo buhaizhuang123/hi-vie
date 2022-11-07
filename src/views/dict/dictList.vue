@@ -33,9 +33,8 @@ export default {
       dictTbList: []
     }
   },
-  created() {
+  mounted() {
     this.searchDic();
-    console.log('进来了')
   },
   methods: {
     searchDic() {
@@ -43,6 +42,7 @@ export default {
         this.dictTbList = res.data
         console.log(res)
       }).catch(err => {
+
       })
     }
   }

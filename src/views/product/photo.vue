@@ -1,12 +1,12 @@
 <template>
   <div>
-    <el-continer>
+    <el-container>
       <el-header>
         图片
         <el-button @click="show"></el-button>
         <el-image :src="image"></el-image>
       </el-header>
-    </el-continer>
+    </el-container>
   </div>
 </template>
 

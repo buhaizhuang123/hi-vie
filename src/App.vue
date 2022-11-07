@@ -46,11 +46,6 @@ export default {
     return {
       reload: this.reload
     }
-  },
-  mounted() {
-    this.$router.push({
-      name: 'login'
-    })
   }
 }
 </script>

@@ -30,9 +30,6 @@
             <i slot="suffix" class="el-input__icon el-icon-close" @click="cleanVal"></i>
             <el-button slot="append" icon="el-icon-search" @click="searchPerson(person)"></el-button>
           </el-input>
-          <el-main>
-
-          </el-main>
         </el-container>
       </el-main>
       <el-footer>
@@ -186,6 +183,7 @@ export default {
       this.$axios.post('/product/ps/search', data,{
         params:this.page
       }).then(res => {
+        console.log('res',res)
         this.persons = res.data
       })
     },
@@ -224,7 +222,7 @@ export default {
     toPage(){
       this.$router.push(
           {
-            path:'hpIndex'
+            path:'home'
           }
       )
     }
