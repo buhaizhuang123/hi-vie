@@ -8,51 +8,61 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/hpIndex',
-        name: 'hpIndex',
+        name: '/hpIndex',
         component: () => import('@/views/hp/hpIndex')
     },
     {
         path: '/dictList',
-        name: 'dictList',
+        name: '/dictList',
         component: () => import('@/views/dict/dictList')
     },
     {
         path: '/addressBaseInfo',
-        name: 'addressBaseInfo',
+        name: '/addressBaseInfo',
         component: () => import('@/views/address/AddressBaseInfo')
     }, {
         path: '/login',
-        name: 'login',
+        name: '/login',
         component: () => import('@/views/login/Login')
     }, {
         path: '/sys',
-        name: 'sys',
+        name: '/sys',
         component: () => import('@/views/consumer/SysController')
     }, {
         path: '/person_search',
-        name: 'person',
+        name: '/person',
         component: () => import('@/views/product/PersonShow')
     }, {
         path: '/photo',
-        name: 'photo',
+        name: '/photo',
         component: () => import('@/views/product/photo')
     }, {
         path: '/home',
-        name: 'home',
+        name: '/home',
         component: () => import('@/views/Home')
     }, {
         path: '/work',
-        name: 'work',
+        name: '/work',
         component: () => import('@/views/work/work')
     }, {
-        path: 'limit',
-        name: 'limit',
+        path: '/limit',
+        name: '/limit',
         component: () => import('@/views/limit/creditLimit')
     },
     {
-        path: 'limitApply',
-        name: 'limitApply',
+        path: '/limitApply',
+        name: '/limitApply',
         component: () => import('@/views/limit/creditLimitApply')
+    },
+    {
+        path: '/contractList',
+        name: '/contractList',
+        component: () => import('@/views/cont/contractList')
+    },
+    {
+        path: '/contractApply',
+        name: '/contractApply',
+        component: () => import('@/views/cont/contractApply')
     }
 
 ]

@@ -1,33 +1,35 @@
 <template>
   <div>
     <el-container>
-        <el-footer>
-          <el-form ref="form" style="width: 100%" :model="user" label-width="100px" :label-position="labelPosition" >
-            <el-form-item label="用户名"  >
-              <el-col :span="11">
-                <el-input type="text" name="username" style="width: 300px" v-model="user.username"></el-input>
-              </el-col>
-            </el-form-item>
-            <el-form-item label="密码" :rules="[
+      <el-footer>
+        <el-form ref="form" style="width: 100%" :model="user" label-width="100px" :label-position="labelPosition">
+          <el-form-item label="用户名">
+            <el-col :span="11">
+              <el-input type="text" name="username" style="width: 300px" v-model="user.username"></el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="密码" :rules="[
                 { required: true, message: '密码不能为空'},
                 { type: 'number', message: '密码必须为数字值'}]">
-              <el-col :span="11">
-                <el-input show-password	 type="password" name="password" style="width: 300px"  v-model="user.password"></el-input>
-              </el-col>
-            </el-form-item>
-            <el-form-item label="验证码">
-              <el-container style="width: 300px" >
-                <el-input @keydown.enter.native="login(user)" aria-placeholder="验证码" v-model="user.imgValue" maxlength="5"></el-input>
-                <el-image :src="imgObj.src" @click="imgLoad"></el-image>
-              </el-container>
-            </el-form-item>
-            <el-form-item  style="width: 300px" >
-              <el-col :span="4">
-                <el-button type="success" @click="login(user)">login</el-button>
-              </el-col>
-            </el-form-item>
-          </el-form>
-        </el-footer>
+            <el-col :span="11">
+              <el-input show-password type="password" name="password" style="width: 300px"
+                        v-model="user.password"></el-input>
+            </el-col>
+          </el-form-item>
+          <el-form-item label="验证码">
+            <el-container style="width: 300px">
+              <el-input @keydown.enter.native="login(user)" aria-placeholder="验证码" v-model="user.imgValue"
+                        maxlength="5"></el-input>
+              <el-image :src="imgObj.src" @click="imgLoad"></el-image>
+            </el-container>
+          </el-form-item>
+          <el-form-item style="width: 300px">
+            <el-col :span="4">
+              <el-button type="success" @click="login(user)">login</el-button>
+            </el-col>
+          </el-form-item>
+        </el-form>
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -47,7 +49,7 @@ export default {
         value: '',
         src: ''
       },
-      labelPosition:'left'
+      labelPosition: 'left'
     }
   },
   methods: {
@@ -58,8 +60,9 @@ export default {
         console.log(res, 'res')
         if (res.data.success) {
           localStorage.setItem('authentication', res.headers.authentication)
-          this.$router.push({
-            path: '/home'
+          this.$router.replace({
+            path: '/home',
+            query: {id: 'work'}
           })
         }
         if (!res.data.success) {
@@ -69,10 +72,8 @@ export default {
     },
     imgLoad() {
       this.$axios.get('doc/image/generate').then(req => {
-        console.log(req)
         this.imgObj.src = req.data.value
         this.user.imgKey = req.data.key
-        console.log(this.src)
       })
     },
   },

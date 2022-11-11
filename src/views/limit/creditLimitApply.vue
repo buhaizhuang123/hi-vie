@@ -153,10 +153,17 @@ export default {
     to() {
       this.$router.push({
         path: 'home',
-        query: {id:'limit'}
+        query: {id: 'limit'}
       })
+    },
+    showPage(){
+      this.creditLimit.personalInfo = this.$route.query
+      console.log(this.$route.query)
     }
 
+  },
+  mounted() {
+    this.showPage()
   }
 }
 </script>

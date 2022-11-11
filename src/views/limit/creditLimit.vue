@@ -20,7 +20,7 @@
 
         <el-main>
           <el-header style="text-align: right; font-size: 12px;">
-            <el-button class="el-icon-setting" style="margin-right: 15px" @click="toApply" type="primary">
+            <el-button class="el-icon-setting" style="margin-right: 15px" @click="toApply({})" type="primary">
               申请
             </el-button>
             <el-button class="el-icon-setting" style="margin-right: 15px" @click="loadLimit(search)" type="primary">
@@ -45,6 +45,11 @@
                       inactive-text="失效"
                       @change="ck($event,scope)">
                   </el-switch>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button icon="el-icon-edit" @click="toApply(scope.row)"></el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -79,11 +84,12 @@ export default {
         console.log(err)
       })
     },
-    toApply() {
+    toApply(data) {
       // 跳转授信申请页面
-      this.$router.push(
+      this.$router.replace(
           {
-            name: 'limitApply'
+            path: '/limitApply',
+            query: data
           }
       )
     },
