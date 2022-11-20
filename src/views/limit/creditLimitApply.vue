@@ -156,9 +156,16 @@ export default {
         query: {id: 'limit'}
       })
     },
-    showPage(){
-      this.creditLimit.personalInfo = this.$route.query
-      console.log(this.$route.query)
+    showPage() {
+      this.$axios.get('product/limit/findByApplSeq', {
+        params: {'applSeq': this.$route.query.applSeq}
+      }).then(res => {
+        console.log(res)
+      }).catch(err => console.log(err))
+
+      //
+      // this.creditLimit.personalInfo = this.$route.query
+      // console.log(this.$route.query)
     }
 
   },
