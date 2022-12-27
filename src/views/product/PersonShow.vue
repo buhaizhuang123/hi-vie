@@ -197,7 +197,7 @@ export default {
     },
     cleanVal() {
       this.person.value = ''
-      this.reload()
+      this.searchPerson(this.person)
     },
     valueTrim(data) {
       data = data.trim()
