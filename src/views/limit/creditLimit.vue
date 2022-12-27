@@ -35,14 +35,12 @@
               <el-table-column label="身份证号" prop="idNo"></el-table-column>
               <el-table-column label="手机号" prop="mobilePhone"></el-table-column>
               <el-table-column label="申请日期" prop="applyDt"></el-table-column>
-              <el-table-column label="授信状态">
+              <el-table-column label="生效｜失效" >
                 <template slot-scope="scope">
                   <el-switch
                       v-model="scope.row['limitSts'] === '0'"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="生效"
-                      inactive-text="失效"
                       @change="ck($event,scope)">
                   </el-switch>
                 </template>

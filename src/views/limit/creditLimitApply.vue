@@ -14,13 +14,13 @@
           <el-main>
             <el-form :model="creditLimit.personalInfo" :inline="true" size="mini">
               <el-form-item label="用户名">
-                <el-input v-model="creditLimit.personalInfo.custName"></el-input>
+                <el-input v-model="creditLimit.personalInfo.custName" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="身份证号">
-                <el-input v-model="creditLimit.personalInfo.idNo"></el-input>
+                <el-input v-model="creditLimit.personalInfo.idNo" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="手机号">
-                <el-input v-model="creditLimit.personalInfo.mobilePhone" type="number"></el-input>
+                <el-input v-model="creditLimit.personalInfo.mobilePhone" type="number" :readonly="isReadOnly"></el-input>
               </el-form-item>
             </el-form>
           </el-main>
@@ -34,13 +34,13 @@
           <el-main>
             <el-form :model="creditLimit.spouseInfo" :inline="true" size="mini">
               <el-form-item label="用户名">
-                <el-input v-model="creditLimit.spouseInfo.custName"></el-input>
+                <el-input v-model="creditLimit.spouseInfo.custName" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="身份证号">
-                <el-input v-model="creditLimit.spouseInfo.idNo"></el-input>
+                <el-input v-model="creditLimit.spouseInfo.idNo" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="手机号">
-                <el-input v-model="creditLimit.spouseInfo.mobilePhone" type="number"></el-input>
+                <el-input v-model="creditLimit.spouseInfo.mobilePhone" type="number" :readonly="isReadOnly"></el-input>
               </el-form-item>
             </el-form>
           </el-main>
@@ -54,13 +54,13 @@
           <el-main>
             <el-form :model="creditLimit.contactInfo" :inline="true" size="mini">
               <el-form-item label="用户名">
-                <el-input v-model="creditLimit.contactInfo.custName"></el-input>
+                <el-input v-model="creditLimit.contactInfo.custName" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="身份证号">
-                <el-input v-model="creditLimit.contactInfo.idNo"></el-input>
+                <el-input v-model="creditLimit.contactInfo.idNo" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="手机号">
-                <el-input v-model="creditLimit.contactInfo.mobilePhone" type="number"></el-input>
+                <el-input v-model="creditLimit.contactInfo.mobilePhone" type="number" :readonly="isReadOnly"></el-input>
               </el-form-item>
             </el-form>
           </el-main>
@@ -74,10 +74,10 @@
           <el-main>
             <el-form :model="creditLimit.occupationInfo" :inline="true" size="mini">
               <el-form-item label="职业类型">
-                <el-input v-model="creditLimit.occupationInfo.occuTyp"></el-input>
+                <el-input v-model="creditLimit.occupationInfo.occuTyp" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="职级">
-                <el-input v-model="creditLimit.occupationInfo.occuLevel"></el-input>
+                <el-input v-model="creditLimit.occupationInfo.occuLevel" :readonly="isReadOnly"></el-input>
               </el-form-item>
             </el-form>
           </el-main>
@@ -91,18 +91,18 @@
           <el-main>
             <el-form :inline="true" size="mini" :model="creditLimit.unit">
               <el-form-item label="单位名称">
-                <el-input v-model="creditLimit.unit.unitName"></el-input>
+                <el-input v-model="creditLimit.unit.unitName" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="单位地址">
-                <el-input v-model="creditLimit.unit.unitAddress"></el-input>
+                <el-input v-model="creditLimit.unit.unitAddress" :readonly="isReadOnly"></el-input>
               </el-form-item>
               <el-form-item label="单位联系电话">
-                <el-input type="number" v-model="creditLimit.unit.unitMobilePhone"></el-input>
+                <el-input type="number" v-model="creditLimit.unit.unitMobilePhone" :readonly="isReadOnly"></el-input>
               </el-form-item>
             </el-form>
           </el-main>
         </el-container>
-        <el-button type="primary" size="small" icon="el-icon-check" @click="saveApply(creditLimit)">保存</el-button>
+        <el-button type="primary" size="small" icon="el-icon-check" @click="saveApply(creditLimit)" v-show="!isReadOnly">保存</el-button>
         <el-button type="primary" size="small" icon="el-icon-check" @click="to">跳转</el-button>
       </el-main>
     </el-container>
@@ -118,30 +118,31 @@ export default {
     return {
       creditLimit: {
         personalInfo: {
-          custName: null, // 姓名
-          mobilePhone: null, // 手机号
-          idNo: null // 身份证号
+          custName: '', // 姓名
+          mobilePhone: '', // 手机号
+          idNo: '' // 身份证号
         },
         spouseInfo: {
-          custName: null, // 姓名
-          mobilePhone: null, // 手机号
-          idNo: null // 身份证号
+          custName: '', // 姓名
+          mobilePhone: '', // 手机号
+          idNo: '' // 身份证号
         },
         contactInfo: {
-          custName: null, // 姓名
-          mobilePhone: null, // 手机号
-          idNo: null // 身份证号
+          custName: '', // 姓名
+          mobilePhone: '', // 手机号
+          idNo: '' // 身份证号
         },
         occupationInfo: {
-          occuTyp: null, // 职业类型
-          occuLevel: null // 职级
+          occuTyp: '', // 职业类型
+          occuLevel: '' // 职级
         },
         unit: {
-          unitName: null, // 单位名称
-          unitAddress: null, // 单位地址
-          unitMobilePhone: null // 单位联系电话
+          unitName: '', // 单位名称
+          unitAddress: '', // 单位地址
+          unitMobilePhone: '' // 单位联系电话
         }
-      }
+      },
+      isReadOnly: false
     }
   },
   methods: {
@@ -157,10 +158,28 @@ export default {
       })
     },
     showPage() {
+      this.isReadOnly = true
       this.$axios.get('product/limit/findByApplSeq', {
         params: {'applSeq': this.$route.query.applSeq}
       }).then(res => {
-        console.log(res)
+        if (res.data.personalInfo) {
+          this.creditLimit.personalInfo = res.data.personalInfo
+        }
+
+        if (res.data.spouseInfo) {
+          this.creditLimit.spouseInfo = res.data.spouseInfo
+        }
+
+        if (res.data.contactInfo) {
+          this.creditLimit.contactInfo = res.data.contactInfo
+        }
+
+        if (res.data.occupationInfo) {
+          this.creditLimit.occupationInfo = res.data.occupationInfo
+        }
+        if (res.data.unit) {
+          this.creditLimit.unit = res.data.unit
+        }
       }).catch(err => console.log(err))
 
       //
