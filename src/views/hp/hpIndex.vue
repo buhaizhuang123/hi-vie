@@ -28,6 +28,7 @@
                   <el-menu-item-group>
 
                     <el-menu-item index="1-1" @click="currentNode = 'dictList'">标签管理</el-menu-item>
+                    <el-menu-item index="1-2" @click="currentNode = 'custManager'">客户管理</el-menu-item>
 
                   </el-menu-item-group>
 
@@ -46,6 +47,7 @@
             <hpUpdate v-if="currentNode === 'hpUpdate'"  @toPage="data=>{ currentNode = data['path']}" :inputData="inputData" :customerInfo="inputData" ></hpUpdate>
             <dictList v-if="currentNode === 'dictList'"  ></dictList>
             <addressList v-if="currentNode === 'addressList'" ></addressList>
+            <custManager v-if="currentNode === 'custManager'" ></custManager>
           </el-main>
         </el-container>
     </el-container>
@@ -56,8 +58,9 @@
 import hpList from '@/views/hp/hpList'
 import hpAdd from '@/views/hp/hpAdd'
 import hpUpdate from '@/views/hp/hpUpdate'
-import dictList from '@/views/dict/dictList'
+import dictList from '@/views/system/dict/dictList'
 import addressList from "@/views/address/addressList";
+import custManager from "@/views/system/cust/custManage";
 
 export default {
   name: "hpIndex",
@@ -66,7 +69,8 @@ export default {
     hpUpdate,
     hpAdd,
     dictList,
-    addressList
+    addressList,
+    custManager
   },
   data(){
     return {

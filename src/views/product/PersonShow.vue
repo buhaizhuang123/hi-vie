@@ -36,7 +36,7 @@
         <el-popover
             placement="bottom"
             title="添加用户"
-            width="500"
+            width="500px"
             trigger="manual"
             v-model="visible">
           <el-container>
@@ -77,7 +77,7 @@
           <el-button slot="reference" @click="changeVis()">添加用户</el-button>
         </el-popover>
         <el-main>
-          <el-table :data="persons" height="528px">
+          <el-table :data="persons">
             <el-table-column label="姓名" prop="name">
               <template slot-scope="scope">
                 <div v-html="scope.row.name"></div>
