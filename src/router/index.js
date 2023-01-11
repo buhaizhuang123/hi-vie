@@ -26,10 +26,6 @@ const routes = [
                 name: '/addressBaseInfo',
                 component: () => import('@/views/address/AddressBaseInfo')
             }, {
-                path: '/login',
-                name: '/login',
-                component: () => import('@/views/login/Login')
-            }, {
                 path: '/sys',
                 name: '/sys',
                 component: () => import('@/views/consumer/SysController')
@@ -41,7 +37,7 @@ const routes = [
                 path: '/photo',
                 name: '/photo',
                 component: () => import('@/views/product/photo')
-            },  {
+            }, {
                 path: '/work',
                 name: '/work',
                 component: () => import('@/views/work/work')
@@ -74,8 +70,12 @@ const routes = [
     {
         path: '/NavMenu',
         name: 'NavMenu',
-        component: ()=>import('@/views/nav/NavMenu')
-    }
+        component: () => import('@/views/nav/NavMenu')
+    }, {
+        path: '/login',
+        name: '/login',
+        component: () => import('@/views/login/Login')
+    },
 
 ]
 

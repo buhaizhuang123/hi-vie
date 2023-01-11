@@ -6,7 +6,6 @@
       <el-aside width="200px">
         <NavMenu></NavMenu>
       </el-aside>
-
       <el-main>
         <div>
           <router-view/>
@@ -32,9 +31,6 @@ export default {
     }
   },
   mounted() {
-    if (this.$route.query) {
-      this.currentNode = this.$route.query.id
-    }
   }
 }
 </script>

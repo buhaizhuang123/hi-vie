@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-row class="tac">
-      <el-col :span="12">
+      <el-col >
         <el-menu :default-active="$route.path" :router="true">
           <el-menu-item index="/work" >
             <template slot="title">

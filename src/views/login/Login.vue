@@ -60,10 +60,10 @@ export default {
         console.log(res, 'res')
         if (res.data.success) {
           localStorage.setItem('authentication', res.headers.authentication)
-          this.$router.replace({
-            path: '/home',
-            query: {id: 'work'}
-          })
+          this.$router.push({
+            path: '/layout'
+          });
+          location.reload()
         }
         if (!res.data.success) {
           this.$message.error("登录失败   " + res.data.message)

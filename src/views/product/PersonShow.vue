@@ -14,8 +14,8 @@
       <el-main>
         <el-container>
           <template>
-            <el-select     multiple
-                           collapse-tags
+            <el-select multiple
+                       collapse-tags
                        v-model="person.types">
               <el-option
                   v-for="item in options"
@@ -31,8 +31,6 @@
             <el-button slot="append" icon="el-icon-search" @click="searchPerson(person)"></el-button>
           </el-input>
         </el-container>
-      </el-main>
-      <el-footer>
         <el-popover
             placement="bottom"
             title="添加用户"
@@ -76,42 +74,42 @@
           </el-container>
           <el-button slot="reference" @click="changeVis()">添加用户</el-button>
         </el-popover>
-        <el-main>
-          <el-table :data="persons">
-            <el-table-column label="姓名" prop="name">
-              <template slot-scope="scope">
-                <div v-html="scope.row.name"></div>
-              </template>
-            </el-table-column>
-            <el-table-column label="年纪" prop="age"></el-table-column>
-            <el-table-column label="身份证" prop="idCard">
-              <template slot-scope="scope">
-                <div v-html="scope.row.idCard"></div>
-              </template>
-            </el-table-column>
-            <el-table-column label="地址" prop="address">
-              <template slot-scope="scope">
-                <div v-html="scope.row.address"></div>
-              </template>
-            </el-table-column>
-            <el-table-column label="生日" prop="birthday">
-              <template slot-scope="scope">
-                <div v-html="scope.row.birthday"></div>
-              </template>
-            </el-table-column>
-            <el-table-column fixed="right"
-                             label="操作"
-                             width="100">
-              <template slot-scope="scope">
-                <el-button type="danger" icon="el-icon-delete" size="small" @click="delPerson(scope.row.id)">删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-main>
+        <el-table :data="persons">
+          <el-table-column label="姓名" prop="name">
+            <template slot-scope="scope">
+              <div v-html="scope.row.name"></div>
+            </template>
+          </el-table-column>
+          <el-table-column label="年纪" prop="age"></el-table-column>
+          <el-table-column label="身份证" prop="idCard">
+            <template slot-scope="scope">
+              <div v-html="scope.row.idCard"></div>
+            </template>
+          </el-table-column>
+          <el-table-column label="地址" prop="address">
+            <template slot-scope="scope">
+              <div v-html="scope.row.address"></div>
+            </template>
+          </el-table-column>
+          <el-table-column label="生日" prop="birthday">
+            <template slot-scope="scope">
+              <div v-html="scope.row.birthday"></div>
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right"
+                           label="操作"
+                           width="100">
+            <template slot-scope="scope">
+              <el-button type="danger" icon="el-icon-delete" size="small" @click="delPerson(scope.row.id)">删除
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
         <el-pagination layout="prev, pager, next" @current-change="currentChange" @next-click="currentChange"
                        :total="20">
         </el-pagination>
-      </el-footer>
+      </el-main>
+
     </el-container>
   </div>
 </template>
@@ -119,7 +117,7 @@
 <script>
 export default {
   name: "PersonShow",
-  inject:['reload'],
+  inject: ['reload'],
   data() {
     return {
       input: '',
@@ -127,9 +125,9 @@ export default {
       person: {
         type: '',
         value: '',
-        types:[]
+        types: []
       },
-      page:{
+      page: {
         pageNum: 0,
         size: 10,
       },
@@ -163,7 +161,7 @@ export default {
   mounted() {
     this.searchPerson(this.person)
   },
-  watch:{
+  watch: {
     // persons: {
     //   handler(newVal, oldVal) {
     //   },
@@ -180,10 +178,10 @@ export default {
     },
     searchPerson(data) {
       console.log(this.person)
-      this.$axios.post('/product/ps/search', data,{
-        params:this.page
+      this.$axios.post('/product/ps/search', data, {
+        params: this.page
       }).then(res => {
-        console.log('res',res)
+        console.log('res', res)
         this.persons = res.data
       })
     },
@@ -197,6 +195,7 @@ export default {
     },
     cleanVal() {
       this.person.value = ''
+      this.person.type = ''
       this.searchPerson(this.person)
     },
     valueTrim(data) {
@@ -210,8 +209,8 @@ export default {
       });
       this.reload()
     },
-    delPerson(data){
-      this.$axios.get('product/ps/del', {params: {"id":data}}).then(res => {
+    delPerson(data) {
+      this.$axios.get('product/ps/del', {params: {"id": data}}).then(res => {
         this.reload()
       });
     },
@@ -219,10 +218,10 @@ export default {
       this.visible = !this.visible
       this.personInfo = {}
     },
-    toPage(){
+    toPage() {
       this.$router.push(
           {
-            path:'home'
+            path: 'home'
           }
       )
     }
